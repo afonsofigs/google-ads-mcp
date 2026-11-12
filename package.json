@@ -1,0 +1,40 @@
+{
+  "name": "google-ads-mcp",
+  "version": "1.0.0",
+  "description": "Read-only Google Ads MCP server for Claude.ai: OAuth 2.1 proxy in front of googleads/google-ads-mcp",
+  "type": "module",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "bash test/run-local.sh",
+    "test:security": "node test/security.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "google-ads",
+    "model-context-protocol",
+    "claude"
+  ],
+  "author": "afonsofigs (https://github.com/afonsofigs)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afonsofigs/google-ads-mcp.git"
+  },
+  "homepage": "https://github.com/afonsofigs/google-ads-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/afonsofigs/google-ads-mcp/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "express": "^4.22.3",
+    "zod": "^4.6.7"
+  },
+  "overrides": {
+    "qs": "6.17.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

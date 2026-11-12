@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "description": [
+    "The backend (google-ads-mcp and every transitive Python dependency) is",
+    "pinned with hashes in requirements.txt, compiled by uv from requirements.in.",
+    "The pip-compile manager re-runs that compile so the hashes stay valid;",
+    "pip_requirements is off so nothing bumps a pin in requirements.txt without",
+    "regenerating its hashes.",
+    "minimumReleaseAge holds updates for 5 days."
+  ],
+  "timezone": "Europe/Lisbon",
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "dependencyDashboard": true,
+  "rangeStrategy": "pin",
+  "minimumReleaseAge": "5 days",
+  "pip-compile": {
+    "managerFilePatterns": [
+      "/(^|/)requirements\\.txt$/"
+    ]
+  },
+  "pip_requirements": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "description": "Proxy plumbing moves together.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "proxy dependencies"
+    },
+    {
+      "description": "Upstream backend: read its release notes, re-run test/run-local.sh (the tool allowlist fails closed if a new tool appears).",
+      "matchManagers": [
+        "pip-compile"
+      ],
+      "groupName": "upstream google-ads-mcp",
+      "semanticCommitType": "build"
+    }
+  ]
+}

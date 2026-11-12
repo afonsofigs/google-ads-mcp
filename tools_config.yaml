@@ -1,0 +1,31 @@
+# Tools configuration for the backend (google-ads-mcp), baked into the image and
+# loaded through GOOGLE_ADS_MCP_TOOLS_CONFIG (an explicit path: if the file is
+# missing the backend refuses to start instead of falling back to the bundled
+# default, which enables every tool, including the write ones).
+#
+# Read-only by design:
+#   - labels (manage_labels, manage_label_associations) and assets
+#     (create_asset, upload_video_asset) are the namespaces that write to the
+#     Google Ads account; they are disabled.
+#   - the read namespaces carry an explicit enabled_tools allowlist, so a new
+#     tool upstream adds to one of them stays off until it is reviewed here.
+#   - prefix "" mounts them without a namespace, so the tools keep their bare
+#     names (search, not search_search).
+# backend.py and server.js both refuse to start if the resulting tool list is
+# not exactly the three read tools.
+
+namespaces:
+  customers:
+    prefix: ""
+    enabled_tools:
+      - list_accessible_customers
+  search:
+    prefix: ""
+    enabled_tools:
+      - search
+  metadata:
+    prefix: ""
+    enabled_tools:
+      - get_resource_metadata
+  labels: false
+  assets: false

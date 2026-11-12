@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# local config and logs
+.env
+.env.*
+*.log
+
+# credentials and token stores: never commit
+adc.json
+application_default_credentials.json
+client_secret*.json
+credentials*.json
+oauth-tokens.json
+*.pem
+*.key
